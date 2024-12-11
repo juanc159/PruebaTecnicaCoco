@@ -80,6 +80,7 @@ Este proyecto es una API RESTful desarrollada en Laravel para gestionar reservas
 ## Rutas y Endpoints de la API
 
 #### para poder usar las apis deberá registrar un usuario y loguearse, se implemento un sistema de authenticación básico  con JWT
+#### se deja en la raiz el archivo Prueba Coco.postman_collection.json
 
 1. **GET /api/register**:
 #### Descripción:
