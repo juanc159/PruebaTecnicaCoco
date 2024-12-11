@@ -21,17 +21,11 @@ Este proyecto es una API RESTful desarrollada en Laravel para gestionar reservas
 2. **ReservationController**: Maneja las operaciones de reservas. Permite crear reservas, verificar la disponibilidad y cancelar reservas.
 
 ### Patrones de Diseño
-1. **Repository Pattern**: El patrón Repository se utiliza para separar la lógica de acceso a datos de la lógica de negocio. Los repositorios `ResourceRepository` y `ReservationRepository` gestionan las consultas a la base de datos y mejoran la mantenibilidad del código.
-2. **Factory Pattern**: Este patrón facilita la creación de objetos de reserva, permitiendo extender la funcionalidad si se añaden más tipos de recursos en el futuro.
+1. **Repository Pattern**: El patrón Repository se utiliza para separar lógica de negocio. Los repositorios `ResourceRepository` y `ReservationRepository` gestionan las consultas a la base de datos y mejoran la mantenibilidad del código.
 
 ### Validación de Conflictos de Reserva
 - Al crear una nueva reserva, la API valida si el recurso está disponible en el horario solicitado. Si hay un conflicto (es decir, si ya existe una reserva en ese horario), no se permite crear la nueva reserva.
 
-## Decisiones de Diseño
-
-### Elección de Patrones
-- **Repository Pattern**: Elegimos este patrón para separar las responsabilidades de acceso a la base de datos de la lógica de negocio. Esto hace que el código sea más limpio y escalable.
-- **Factory Pattern**: Se usó para facilitar la creación de reservas. Este patrón permite agregar diferentes tipos de recursos sin afectar otras partes del sistema.
 
 ### Consultas y Validaciones
 - La consulta de disponibilidad y la validación de conflictos de horarios se gestionan directamente en los controladores, utilizando la lógica de repositorio para verificar la disponibilidad de los recursos antes de crear una reserva.
@@ -39,7 +33,7 @@ Este proyecto es una API RESTful desarrollada en Laravel para gestionar reservas
 ## Instrucciones de Configuración
 
 ### Requisitos
-- PHP 8.1 o superior
+- PHP 8.2 o superior
 - Composer
 - Laravel 11.x
 - MySQL o cualquier base de datos compatible
@@ -47,16 +41,13 @@ Este proyecto es una API RESTful desarrollada en Laravel para gestionar reservas
 ### Pasos para Configurar el Proyecto
 
 1. **Clonar el Repositorio**:
-   ```bash
    https://github.com/juanc159/PruebaTecnicaCoco.git
    cd pruebaTecnicaCoco
 
 2. **Instalar las Dependencias**:
-   ```bash
    composer install
 
 3. **Configurar el archivo**:
-   ```bash
    mv .env.example .env
 
     DB_CONNECTION=mysql
@@ -67,25 +58,49 @@ Este proyecto es una API RESTful desarrollada en Laravel para gestionar reservas
     DB_PASSWORD=tu_contraseña
 
 4. **Generar la Clave de la Aplicación**:
-   ```bash
    php artisan key:generate
 
 5. **Ejecutar las Migraciones**:
-   ```bash
    php artisan migrate
 
-6. **Iniciar el Servidor**:
-   ```bash
+6. **Ejecutar las seeder**: 
+    es para tener informacion en la tabla  resources
+   
+   php artisan db:seed --class=ResourceSeeder
+
+7. **Iniciar el Servidor**:
    php artisan serve
 
 
 ## Rutas y Endpoints de la API
 
-1. **GET /resources**:
+#### para poder usar las apis deberá registrar un usuario y loguearse, se implemento un sistema de authenticación básico  con JWT
+
+1. **GET /api/register**:
+#### Descripción:
+    Registrar un usuario.
+#### Respuesta: 
+    {
+        "name": "Juan Carlos",
+        "email": "prueba@gmail.com", 
+        "password": "123456789"
+    }
+
+2. **GET /api/login**:
+#### Descripción:
+    Registrar un usuario.
+#### Respuesta: 
+    { 
+        "email": "prueba@gmail.com", 
+        "password": "123456789"
+    }
+
+
+
+3. **GET /api/resources**:
 #### Descripción:
     Lista todos los recursos disponibles.
 #### Respuesta:
-    ```bash
     [
         {
             "id": 1,
@@ -101,7 +116,7 @@ Este proyecto es una API RESTful desarrollada en Laravel para gestionar reservas
         }
     ]
 
-2. **GET /resources/{id}/availability**:
+4. **GET /api/resources/{id}/availability**:
 #### Descripción:
     Consulta la disponibilidad de un recurso en un horario específico.
 #### Parámetros:
@@ -111,7 +126,7 @@ Este proyecto es una API RESTful desarrollada en Laravel para gestionar reservas
         "available": true
     }
 
-3. **POST /reservations**:
+3. **POST /api/reservations**:
 #### Descripción:
     Crea una nueva reserva para un recurso.
 #### Cuerpo de la Solicitud: 
@@ -130,13 +145,10 @@ Este proyecto es una API RESTful desarrollada en Laravel para gestionar reservas
     }
 
 
-4. **DELETE /reservations/{id}**:
+4. **DELETE /api/reservations/{id}**:
 #### Descripción:
     Cancela una reserva existente. 
 #### Respuesta: 
     {
-  "message": "Reserva cancelada con éxito"
-}
-
-
-
+        "message": "Reserva cancelada correctamente"
+    }
