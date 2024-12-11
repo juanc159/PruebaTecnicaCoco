@@ -62,18 +62,25 @@ Este proyecto es una API RESTful desarrollada en Laravel para gestionar reservas
     
     DB_PASSWORD=tu_contraseña
 
-4. **Generar la Clave de la Aplicación**:
+    JWT_SECRET=
+
+    AUTH_GUARD=api
+
+4. **Generar la Clave de JWT**:
+   php artisan jwt:secret
+
+5. **Generar la Clave de la Aplicación**:
    php artisan key:generate
 
-5. **Ejecutar las Migraciones**:
+6. **Ejecutar las Migraciones**:
    php artisan migrate
 
-6. **Ejecutar las seeder**: 
+7.  **Ejecutar las seeder**: 
     es para tener informacion en la tabla  resources
    
    php artisan db:seed --class=ResourceSeeder
 
-7. **Iniciar el Servidor**:
+8. **Iniciar el Servidor**:
    php artisan serve
 
 
