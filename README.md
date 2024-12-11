@@ -51,10 +51,15 @@ Este proyecto es una API RESTful desarrollada en Laravel para gestionar reservas
    mv .env.example .env
 
     DB_CONNECTION=mysql
+
     DB_HOST=127.0.0.1
+
     DB_PORT=3306
+
     DB_DATABASE=sistema_reservas
+
     DB_USERNAME=tu_usuario
+    
     DB_PASSWORD=tu_contraseña
 
 4. **Generar la Clave de la Aplicación**:
